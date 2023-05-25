@@ -1,0 +1,15 @@
+
+
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="{% static 'css/product-details.css' %}">
+    <div class="product-details">
+        <img class="thumbnail" src="{{ product.imageURL }}">
+        <h1><strong>{{ product.name }}</strong></h1>
+        <p>{{ product.description }}</p>
+        <h4><strong>${{ product.price }}</strong></h4>
+    </div>
+{% endblock content %}

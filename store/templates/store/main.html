@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Ecom</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1" />
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+
+
+	 <!-- font awesome cdn link  -->
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+	 
+
+	<script type="text/javascript">
+		var user = '{{request.user}}'
+
+		function getToken(name) {
+		    var cookieValue = null;
+		    if (document.cookie && document.cookie !== '') {
+		        var cookies = document.cookie.split(';');
+		        for (var i = 0; i < cookies.length; i++) {
+		            var cookie = cookies[i].trim();
+		            // Does this cookie string begin with the name we want?
+		            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+		                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+		                break;
+		            }
+		        }
+		    }
+		    return cookieValue;
+		}
+		var csrftoken = getToken('csrftoken')
+
+		function getCookie(name) {
+		    // Split cookie string and get all individual name=value pairs in an array
+		    var cookieArr = document.cookie.split(";");
+
+		    // Loop through the array elements
+		    for(var i = 0; i < cookieArr.length; i++) {
+		        var cookiePair = cookieArr[i].split("=");
+
+		        /* Removing whitespace at the beginning of the cookie name
+		        and compare it with the given string */
+		        if(name == cookiePair[0].trim()) {
+		            // Decode the cookie value and return
+		            return decodeURIComponent(cookiePair[1]);
+		        }
+		    }
+
+		    // Return null if not found
+		    return null;
+		}
+		var cart = JSON.parse(getCookie('cart'))
+
+		if (cart == undefined){
+			cart = {}
+			console.log('Cart Created!', cart)
+			document.cookie ='cart=' + JSON.stringify(cart) + ";domain=;path=/"
+		}
+		console.log('Cart:', cart)
+	
+	</script>
+
+</head>
+<body>
+
+
+<!-- header section starts  -->
+
+<header class="header">
+
+    <section class="header-1">
+
+        <a href="{% url 'store' %}" class="logo"> <i class="fas fa-book"></i> book </a>
+
+        <form action="{% url 'search' %}" class="search-form" method="GET">
+            <input type="search" name="query" placeholder="search here..." id="search-box">
+            <button type="submit" class="fas fa-search"></button>
+        </form>        
+
+        <div class="form-inline my-2 my-lg-0">
+			<a href="{% url 'login' %}"class="btn btn-warning">Login</a>
+			
+			<a href="{% url 'cart' %}">
+			   <img  id="cart-icon" src="{% static 'images/cccaarrrtttt.png' %}">
+		   </a>
+		   <p id="cart-total">{{cartItems}}</p>
+
+	   </div>
+
+    </section>
+
+    <div class="header-2">
+        <nav class="navbar">
+            <a href="{% url 'store' %}">home</a>
+            <a href="{% url 'product_list' %}">featured</a>
+            <a href="{% url 'Our_services' %}">about us</a>
+            <a href="{% url 'contact' %}">contact us</a>
+            
+        </nav>
+    </div>
+
+</header>
+
+<!-- header section ends -->
+
+<!-- bottom navbar  -->
+
+<nav class="bottom-navbar">
+    <a href="#home" class="fas fa-home"></a>
+    <a href="#featured" class="fas fa-list"></a>
+    <a href="#arrivals" class="fas fa-tags"></a>
+    <a href="#reviews" class="fas fa-comments"></a>
+    
+</nav>
+
+	<!-- home section starts  -->
+
+<div class="home-container">
+
+    <section class="home" id="home">
+
+        <div class="row">
+    
+            <div class="content">
+                <h3>Unlock the power of knowledge</h3>
+                <p>Unleash your imagination. Dive into captivating stories. Discover the joy of reading</p>
+                <a href="{% url 'product_list' %}" class="btn">shop now</a>
+            </div>
+    
+            <div class="swiper books-slider">
+                <div class="swiper-wrapper">
+                    <a href="#" class="swiper-slide"><img src="images/book-1.png" alt=""></a>
+                    <a href="#" class="swiper-slide"><img src="images/book-2.png" alt=""></a>
+                    
+                    
+                </div>
+                <img src="images/stand.png" class="stand" alt="">
+            </div>
+    
+        </div>
+    
+    </section>
+
+</div>
+
+
+
+<section class="featured" id="featured">
+
+    <h1 class="heading"> <span>featured books</span> </h1>
+   
+
+</section>
+
+     <div class="container">
+            <br>
+            {% block content %}
+
+            <br>
+
+            {% endblock content %}
+         </div>
+
+<br>
+
+
+
+<br>
+
+
+
+
+<div class="deal-container">
+
+    <section class="deal">
+
+        <div class="content">
+            <h3>deal of the day</h3>
+            <h1>50% off</h1>
+            <p>Attention book lovers! We have an exclusive offer just for you. Use the coupon code 'BOOK50' during checkout to enjoy a fabulous 50% discount on your next purchase. Don't miss out on this opportunity to expand your personal library at unbeatable prices. Happy reading!</p>
+            <a href="#" class="btn">shop now</a>
+        </div>
+    
+        <div class="image">
+            <img src="image/deal-img.jpg" alt="">
+        </div>
+    
+    </section>
+    
+    
+</div>
+
+<!-- deal section ends -->
+
+<!-- reviews section starts  -->
+
+<section class="reviews" id="reviews">
+
+    <h1 class="heading"> <span>client's reviews</span> </h1>
+
+    <div class="swiper reviews-slider">
+
+        <div class="swiper-wrapper">
+
+            <div class="swiper-slide box">
+                <img src="images/pic-1.png" alt="">
+                <h3>jean liranedo</h3>
+                <p>I had a wonderful experience purchasing a book from this website. The user-friendly interface made it easy to browse through various genres, and I found myself lost in the vast collection of titles</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <img src="images/pic-2.png" alt="">
+                <h3>marina semor</h3>
+                <p>I recently purchased a book from this website, and I must say, it was a fantastic choice. The ordering process was simple and convenient, and my book arrived in perfect condition.</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+
+            <div class="swiper-slide box">
+                <img src="images/pic-3.png" alt="">
+                <h3>sivi haloki</h3>
+                <p>I'm thrilled with my recent book purchase! The selection available on this website is impressive, and I found exactly what I was looking for</p>
+                <div class="stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+            </div>
+            
+            </div>
+
+        </div>
+
+    </div>
+    
+</section>
+
+<section class="icons-container">
+
+    <div class="icons">
+        <i class="fas fa-shipping-fast"></i>
+        <div class="content">
+            <h3>free shipping</h3>
+            <p>all pays</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-lock"></i>
+        <div class="content">
+            <h3>secure payment</h3>
+            <p>100 secure payment</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-redo-alt"></i>
+        <div class="content">
+            <h3>easy returns</h3>
+            <p>10 days returns</p>
+        </div>
+    </div>
+
+    <div class="icons">
+        <i class="fas fa-headset"></i>
+        <div class="content">
+            <h3>24/7 support</h3>
+            <p>call us anytime</p>
+        </div>
+    </div>
+
+</section>
+
+<section class="footer">
+
+    <div class="box-container">
+
+        <div class="box">
+            <h3>our locations</h3>
+            <a href="https://www.google.com/maps/d/embed?mid=1iZxU5naXnIb8UGaYOBkR2JEeZHY&hl=en&ehbc=2E312F"> <i class="fas fa-map-marker-alt"></i> morocco </a>
+        </div>
+
+        <div class="box">
+            <h3>quick links</h3>
+            <a href="#"> <i class="fas fa-arrow-right"></i> home </a>
+            <a href="#"> <i class="fas fa-arrow-right"></i> featured </a>
+            <a href="{% url 'Our_services' %}"> <i class="fas fa-arrow-right"></i> about us </a>
+            <a href="{% url 'contact' %}"><i class="fas fa-arrow-right"></i> contact us</a>
+
+          
+        </div>
+
+        <div class="box">
+            <h3>extra links</h3>
+            <a href="{% url 'account_info' %}"> <i class="fas fa-arrow-right"></i> account info </a>
+            <a href="{% url 'privacy_policy' %}"> <i class="fas fa-arrow-right"></i> privacy policy </a>
+            <a href="{% url 'payment methoth' %}"> <i class="fas fa-arrow-right"></i> payment method </a>
+            <a href="{% url 'Our_services' %}"> <i class="fas fa-arrow-right"></i> our serivces </a>
+        </div>
+
+        <div class="box">
+            <h3>contact info</h3>
+            <a href="#"> <i class="fas fa-phone"></i> +212-456-7890 </a>
+            <a href="#"> <i class="fas fa-envelope"></i> booky@gmail.com </a>
+            <img src="image/worldmap.png" class="map" alt="">
+        </div>
+        
+    </div>
+
+    <div class="share">
+        <a href="#" class="fab fa-facebook-f"></a>
+        <a href="#" class="fab fa-twitter"></a>
+        <a href="#" class="fab fa-instagram"></a>
+        <a href="#" class="fab fa-linkedin"></a>
+        <a href="#" class="fab fa-pinterest"></a>
+    </div>
+
+    <div class="credit"> created by <span>BOOK</span> | all rights reserved! </div>
+
+</section>
+
+<!-- footer section ends -->
+
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+	<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+</body>
+</html>
