@@ -18,7 +18,7 @@
 
 📦 Getting Started: Clone the repository, follow the setup instructions in the README, and start building your own Django web applications with ease!
 
-🔗 GitHub Repository:
+🔗 GitHub Repository:https://github.com/abdobzx/django_book_project
 
 🚀 Join the Community: Be part of our growing community of Django enthusiasts. Feel free to ask questions, share your insights, and collaborate on making this project even better!
 
