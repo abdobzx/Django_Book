@@ -1,8 +1,10 @@
 🌐 Project Name: Django Web App
 
+![aze](https://github.com/abdobzx/Django_Book/assets/61870589/40f238a2-70e3-4821-9a4f-3d90730fd73b)
 📚 Description: This open-source project is a web application built using the Django framework. It serves as a versatile foundation for creating dynamic and scalable web applications. Whether you're a beginner or an experienced developer, this project offers a comprehensive example of Django's capabilities, best practices, and features.
 
 🔧 Features:
+
 
 📦 Django ORM: Utilizes Django's powerful Object-Relational Mapping for database interactions.
 🌟 User Authentication: Implements secure user authentication and registration.
