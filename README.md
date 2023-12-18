@@ -1,7 +1,11 @@
 🌐 Project Name: Django Web App
 
 ![aze](https://github.com/abdobzx/Django_Book/assets/61870589/40f238a2-70e3-4821-9a4f-3d90730fd73b)
+![WhatsApp Image 2023-12-18 at 23 54 42_6ee9315b](https://github.com/abdobzx/Django_Book/assets/61870589/9190fcd7-eb15-4276-bc8a-3725178265d9)
+![re](https://github.com/abdobzx/Django_Book/assets/61870589/eb4ba129-415d-48f9-ba13-210dd9b084c2)
+![qs](https://github.com/abdobzx/Django_Book/assets/61870589/b75a8249-55b7-432a-9614-6573d6ac32cf)
 📚 Description: This open-source project is a web application built using the Django framework. It serves as a versatile foundation for creating dynamic and scalable web applications. Whether you're a beginner or an experienced developer, this project offers a comprehensive example of Django's capabilities, best practices, and features.
+
 
 🔧 Features:
 
